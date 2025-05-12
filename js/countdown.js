@@ -15,6 +15,13 @@ function getTimeRemaining(endtime) {
 
 function initializeClock(id, endtime) {
   var clock = document.getElementById(id);
+  
+  // Check if the clock element exists before proceeding
+  if (!clock) {
+    console.log('Countdown element with ID "' + id + '" not found. Skipping countdown initialization.');
+    return;
+  }
+  
   var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
@@ -38,4 +45,7 @@ function initializeClock(id, endtime) {
 }
 
 var deadline = new Date(Date.parse(new Date()) + 30 * 24 * 60 * 60 * 1000);
-initializeClock('clockdiv', deadline);
+// Only initialize the clock if we're on a page that has the clock element
+if (document.getElementById('clockdiv')) {
+  initializeClock('clockdiv', deadline);
+}
